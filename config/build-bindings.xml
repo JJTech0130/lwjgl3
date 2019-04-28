@@ -14,6 +14,14 @@ This script is included in /config/build-definitions.xml.
 
     <!-- // ========== BINDING FLAGS ======== // -->
 
+    <local name="notARM"/>
+    <condition property="notARM">
+        <or>
+            <isset property="build.arch.x64"/>
+            <isset property="build.arch.x86"/>
+        </or>
+    </condition>
+
     <property name="binding.assimp" value="true"/>
     <property name="binding.bgfx" value="true"/>
     <property name="binding.egl" value="true"/>
@@ -21,19 +29,44 @@ This script is included in /config/build-definitions.xml.
     <property name="binding.jawt" value="true"/>
     <property name="binding.jemalloc" value="true"/>
     <property name="binding.lmdb" value="true"/>
+<<<<<<< HEAD
+=======
+    <property name="binding.lz4" value="true"/>
+    <condition property="binding.meow" value="true" else="false">
+        <or>
+            <isset property="notARM"/>
+            <isset property="build.arch.arm64"/>
+        </or>
+    </condition>
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
     <property name="binding.nanovg" value="true"/>
-    <property name="binding.nfd" value="true"/>
+    <condition property="binding.nfd" value="true" else="false"><isset property="notARM"/></condition>
     <property name="binding.nuklear" value="true"/>
     <property name="binding.openal" value="true"/>
     <property name="binding.opencl" value="true"/>
     <property name="binding.opengl" value="true"/>
     <property name="binding.opengles" value="true"/>
+<<<<<<< HEAD
     <property name="binding.openvr" value="true"/>
     <property name="binding.par" value="true"/>
     <property name="binding.sse" value="true"/>
     <property name="binding.stb" value="true"/>
     <property name="binding.tinyexr" value="true"/>
     <property name="binding.tinyfd" value="true"/>
+=======
+    <condition property="binding.openvr" value="true" else="false"><isset property="notARM"/></condition>
+    <property name="binding.opus" value="true"/>
+    <property name="binding.par" value="true"/>
+    <property name="binding.remotery" value="true"/>
+    <property name="binding.rpmalloc" value="true"/>
+    <property name="binding.shaderc" value="true"/>
+    <condition property="binding.sse" value="true" else="false"><isset property="notARM"/></condition>
+    <property name="binding.stb" value="true"/>
+    <property name="binding.tinyexr" value="true"/>
+    <property name="binding.tinyfd" value="true"/>
+    <condition property="binding.tootle" value="true" else="false"><isset property="notARM"/></condition>
+    <property name="binding.vma" value="true"/>
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
     <property name="binding.vulkan" value="true"/>
     <property name="binding.xxhash" value="true"/>
     <property name="binding.yoga" value="true"/>

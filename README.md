@@ -62,9 +62,16 @@ LWJGL 3 requires Java 8 or later to build and run and currently supports the
 following platforms/architectures:
 
 - Linux x64
+<<<<<<< HEAD
 - MacOS X x64
 - Windows x86
+=======
+- Linux arm64 (ARMv8/AArch64)
+- Linux arm32 (ARMv7/armhf)
+- macOS x64
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
 - Windows x64
+- Windows x86
 
 Example code:
 

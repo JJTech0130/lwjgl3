@@ -5,10 +5,6 @@
 <project name="native-windows" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
 
-    <condition property="LIB_POSTFIX" value="" else="32">
-        <equals arg1="${build.arch}" arg2="x64"/>
-    </condition>
-
     <macrodef name="compile">
         <attribute name="dest"/>
         <attribute name="flags"/>
@@ -52,7 +48,11 @@
             </compile>
 
             <local name="lib-uptodate"/>
+<<<<<<< HEAD
             <uptodate property="lib-uptodate" targetfile="${lib}/@{name}${LIB_POSTFIX}.dll">
+=======
+            <uptodate property="lib-uptodate" targetfile="${lib.arch}/${name}.dll">
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
                 <srcfiles file="config/${platform}/build.xml"/>
                 <srcfiles dir="@{dest}" includes="**"/>
             </uptodate>
@@ -69,8 +69,13 @@
                     <equals arg1="${build.arch}" arg2="x86"/>
                 </and>
             </condition>
+<<<<<<< HEAD
             <concat destfile="${bin.native}/build/@{name}${LIB_POSTFIX}.def" if:set="undecorate">
                 <header filtering="no">LIBRARY    @{name}${LIB_POSTFIX}.dll
+=======
+            <concat destfile="${bin.native}/build/${name}.def" if:set="undecorate">
+                <header filtering="no">LIBRARY    ${name}.dll
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
 EXPORTS
 </header>
                 <!-- For each source file -->
@@ -87,7 +92,11 @@ EXPORTS
 
             <beforeLink/>
             <apply executable="cl" failonerror="true" parallel="true" taskname="Linker" unless:set="lib-uptodate">
+<<<<<<< HEAD
                 <arg line='/LD /WX /nologo /Fe:"${bin.native}\build\@{name}${LIB_POSTFIX}.dll"'/>
+=======
+                <arg line='/LD /WX /nologo /Fe:"${bin.native}\build\${name}.dll"'/>
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
 
                 <fileset dir="@{dest}" includes="*.obj"/>
                 <link/>
@@ -97,17 +106,34 @@ EXPORTS
                 <arg value="/OPT:REF,ICF"/>
                 <arg value="/DLL"/>
                 <arg value="/LTCG"/>
+<<<<<<< HEAD
                 <arg value="/DEF:${bin.native}\build\@{name}${LIB_POSTFIX}.def" if:set="undecorate"/>
+=======
+                <arg value="/DEF:${bin.native}\build\${name}.def" if:set="undecorate"/>
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
 
                 <linkargs/>
             </apply>
 
+<<<<<<< HEAD
             <move file="${bin.native}/build/@{name}${LIB_POSTFIX}.dll" todir="${lib}" unless:set="lib-uptodate"/>
             <delete file="${lib}/touch_windows_${build.arch}.txt" quiet="true" unless:set="lib-uptodate"/>
+=======
+            <move file="${bin.native}/build/${name}.dll" todir="${lib.arch}" unless:set="lib-uptodate"/>
+            <delete file="${lib.arch}/touch_${platform}.txt" quiet="true" unless:set="lib-uptodate"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="build_simple">
+        <attribute name="module"/>
+        <sequential>
+            <build module="@{module}" simple="true" if:true="${binding.@{module}}"/>
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
         </sequential>
     </macrodef>
 
     <target name="compile-native-platform">
+        <mkdir dir="${lib.arch}"/>
         <mkdir dir="${bin.native}/build"/>
 
         <parallel threadsPerProcessor="1" failonany="true">
@@ -359,12 +385,17 @@ EXPORTS
             <or>
                 <istrue value="${build.offline}"/>
                 <resourceexists>
+<<<<<<< HEAD
                     <file file="${lib}/touch_windows_${build.arch}.txt"/>
+=======
+                    <file file="${lib.arch}/touch_${platform}.txt"/>
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
                 </resourceexists>
             </or>
         </condition>
 
         <sequential unless:set="native-dependencies-uptodate">
+<<<<<<< HEAD
             <mkdir dir="${lib}/windows/${build.arch}"/>
 
             <parallel threadsPerProcessor="4" failonany="true">
@@ -379,6 +410,23 @@ EXPORTS
             </parallel>
 
             <touch file="${lib}/touch_windows_${build.arch}.txt" verbose="false"/>
+=======
+            <parallel threadsPerProcessor="4" failonany="true">
+
+            <update-dependency name="Assimp" artifact="${build.arch}/assimp.dll" dest="${lib.arch}/assimp.dll" if:true="${binding.assimp}"/>
+            <update-dependency name="bgfx" artifact="${build.arch}/bgfx.dll" dest="${lib.arch}/bgfx.dll" if:true="${binding.bgfx}"/>
+            <update-dependency name="jemalloc" artifact="${build.arch}/jemalloc.dll" dest="${lib.arch}/jemalloc.dll" if:true="${binding.jemalloc}"/>
+            <update-dependency name="GLFW" artifact="${build.arch}/glfw.dll" dest="${lib.arch}/glfw.dll" if:true="${binding.glfw}"/>
+            <update-dependency name="OpenAL32" artifact="${build.arch}/OpenAL.dll" dest="${lib.arch}/OpenAL.dll" if:true="${binding.openal}"/>
+            <update-dependency name="OpenVR" artifact="${build.arch}/openvr_api.dll" dest="${lib.arch}/openvr_api.dll" if:true="${binding.openvr}"/>
+            <update-dependency name="Opus" artifact="${build.arch}/opus.dll" dest="${lib.arch}/opus.dll" if:true="${binding.opus}"/>
+            <update-dependency name="Shaderc" artifact="${build.arch}/shaderc.dll" dest="${lib.arch}/shaderc.dll" if:true="${binding.shaderc}"/>
+            <update-dependency name="Shaderc spvc" artifact="${build.arch}/shaderc_spvc.dll" dest="${lib.arch}/shaderc_spvc.dll" if:true="${binding.shaderc}"/>
+
+            </parallel>
+
+            <touch file="${lib.arch}/touch_${platform}.txt" verbose="false"/>
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
         </sequential>
     </target>
 </project>

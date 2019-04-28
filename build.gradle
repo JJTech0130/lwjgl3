@@ -50,6 +50,8 @@ println "${deployment.type.name()} BUILD"
 
 enum Platforms {
     LINUX("linux"),
+    LINUX_ARM64("linux-arm64"),
+    LINUX_ARM32("linux-arm32"),
     MACOS("macos"),
     WINDOWS("windows")
 
@@ -100,6 +102,19 @@ enum Artifacts {
         "A compact, fast, powerful, and robust database that implements a simplified variant of the BerkeleyDB (BDB) API.",
         Platforms.ALL
     ),
+<<<<<<< HEAD
+=======
+    LZ4(
+        "lwjgl-lz4", "LWJGL - LZ4 bindings",
+        "A lossless data compression algorithm that is focused on compression and decompression speed.",
+        Platforms.ALL
+    ),
+    MEOW(
+        "lwjgl-meow", "LWJGL - Meow hash bindings",
+        "An extremely fast non-cryptographic hash.",
+        Platforms.LINUX, Platforms.LINUX_ARM64, Platforms.MACOS, Platforms.WINDOWS
+    ),
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
     NANOVG(
         "lwjgl-nanovg", "LWJGL - NanoVG bindings",
         "A small antialiased vector graphics rendering library for OpenGL.",
@@ -108,7 +123,7 @@ enum Artifacts {
     NFD(
         "lwjgl-nfd", "LWJGL - Native File Dialog bindings",
         "A tiny, neat C library that portably invokes native file open and save dialogs.",
-        Platforms.ALL
+        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS
     ),
     NUKLEAR(
         "lwjgl-nuklear", "LWJGL - Nuklear bindings",
@@ -137,7 +152,16 @@ enum Artifacts {
     ),
     OPENVR(
         "lwjgl-openvr", "LWJGL - OpenVR bindings",
+<<<<<<< HEAD
         "OpenVR is an API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.",
+=======
+        "An API and runtime that allows access to VR hardware from multiple vendors without requiring that applications have specific knowledge of the hardware they are targeting.",
+        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS
+    ),
+    OPUS(
+        "lwjgl-opus", "LWJGL - Opus bindings",
+        "A totally open, royalty-free, highly versatile audio codec.",
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
         Platforms.ALL
     ),
     OVR(
@@ -153,7 +177,7 @@ enum Artifacts {
     SSE(
         "lwjgl-sse", "LWJGL - SSE bindings",
         "Simple SSE intrinsics.",
-        Platforms.ALL
+        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS
     ),
     STB(
         "lwjgl-stb", "LWJGL - stb bindings",
@@ -170,6 +194,19 @@ enum Artifacts {
         "Provides basic modal dialogs.",
         Platforms.ALL
     ),
+<<<<<<< HEAD
+=======
+    TOOTLE(
+        "lwjgl-tootle", "LWJGL - AMD Tootle bindings",
+        "A 3D triangle mesh optimization library that improves on existing mesh preprocessing techniques.",
+        Platforms.LINUX, Platforms.MACOS, Platforms.WINDOWS
+    ),
+    VMA(
+        "lwjgl-vma", "LWJGL - Vulkan Memory Allocator bindings",
+        "An easy to integrate Vulkan memory allocation library.",
+        Platforms.ALL
+    ),
+>>>>>>> 9bd6e6046... build: add support for Linux ARM cross compilation
     VULKAN(
         "lwjgl-vulkan", "LWJGL - Vulkan bindings",
         "A new generation graphics and compute API that provides high-efficiency, cross-platform access to modern GPUs used in a wide variety of devices from PCs and consoles to mobile phones and embedded platforms.",

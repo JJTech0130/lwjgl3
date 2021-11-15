@@ -1575,7 +1575,30 @@
         <release-module name="par" native-library="lwjgl_par" title="par" if:true="${binding.par}"/>
 
         <!-- Remotery -->
-        <release-module name="remotery" native-library="lwjgl_remotery" title="remotery" if:true="${binding.remotery}"/>
+        <release-module name="remotery" title="remotery" if:true="${binding.remotery}">
+            <natives>
+                <get-release platform="linux" arch="x64" file="liblwjgl_remotery.so"/>
+                <get-release platform="linux" arch="x64" file="liblwjgl_remotery.so.git"/>
+
+                <get-release platform="linux" arch="arm64" file="liblwjgl_remotery.so"/>
+                <get-release platform="linux" arch="arm64" file="liblwjgl_remotery.so.git"/>
+
+                <get-release platform="linux" arch="arm32" file="liblwjgl_remotery.so"/>
+                <get-release platform="linux" arch="arm32" file="liblwjgl_remotery.so.git"/>
+
+                <get-release platform="macos" arch="x64" file="liblwjgl_remotery.dylib"/>
+                <get-release platform="macos" arch="x64" file="liblwjgl_remotery.dylib.git"/>
+
+                <get-release platform="macos" arch="arm64" file="liblwjgl_remotery.dylib"/>
+                <get-release platform="macos" arch="arm64" file="liblwjgl_remotery.dylib.git"/>
+
+                <get-release platform="windows" arch="x64" file="lwjgl_remotery.dll"/>
+                <get-release platform="windows" arch="x64" file="lwjgl_remotery.dll.git"/>
+
+                <get-release platform="windows" arch="x86" file="lwjgl_remotery.dll"/>
+                <get-release platform="windows" arch="x86" file="lwjgl_remotery.dll.git"/>
+            </natives>
+        </release-module>
 
         <!-- rpmalloc -->
         <release-module name="rpmalloc" native-library="lwjgl_rpmalloc" title="rpmalloc" if:true="${binding.rpmalloc}"/>
